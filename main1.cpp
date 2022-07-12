@@ -12,7 +12,7 @@ int main() {
 	
 	printf("Enter text: ");
 
-	scanf("%s", str_in);
+	fgets(str_in, N, stdin);
 
 	randomWords(str_in, str_out);
 
