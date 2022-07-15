@@ -1,14 +1,18 @@
 #include "task1.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
 
 #define M 200
 
 char* randomWords(char* in, char* out) {
 
 	char* pArray[M];
+	char* tmpPointer = NULL;
+	int randNum = 0;
 	int pIndex = 0;
 	int i = 0;
-
 
 	while (in[i] != '\0' && in[i] != '\n') {
 		if (in[i] >= 'A' && in[i] <= 'Z' || in[i] >= 'a' && in[i] <= 'z') {
@@ -18,15 +22,36 @@ char* randomWords(char* in, char* out) {
 		}
 		else i++;
 	}
+
 	pArray[pIndex] = NULL;
 	i = 0;
+	printf("\n");
+	// PRINTING AN ARRAY OF POINTERS BEFOR MIXING
 	while (pArray[i] != NULL) {
-		printf("\n%c", *pArray[i]);
+		printf(" %c ", *pArray[i]);
 		i++;
 	}
 
-	// FORM A NEW LINE WITH JUMBLED WORDS
-	// MAY BE IT IS POSSIBLE TO USE AN ADDITIONAL ARRAY WITH ORDINAL NUMBERS OF WORDS
+	printf("\n");
+	i = 0;
+	// FISHER-YATES MIXING
+	srand(time(NULL));
+	for (int i = 0; i < pIndex; i++) {
+		randNum = rand() % pIndex;
+		tmpPointer = pArray[i];
+		pArray[i] = pArray[randNum];
+		pArray[randNum] = tmpPointer;
+	}
+
+	printf("\n");
+	i = 0;
+	// PRINTING AN ARRAY OF POINTERS AFTER MIXING
+	while (pArray[i] != NULL) {
+		printf(" %c ", *pArray[i]);
+		i++;
+	}
+
+	// FORM A NEW STRING USING JUMBLED POINTERS
 
 	return out;	
 }
