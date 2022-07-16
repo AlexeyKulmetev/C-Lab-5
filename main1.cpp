@@ -8,13 +8,15 @@ int main() {
 
 	char str_in[N];
 	char str_out[N];
-
 	
 	printf("Enter text: ");
 
 	fgets(str_in, N, stdin);
 
 	randomWords(str_in, str_out);
+
+	printf("\n");
+	puts(str_out);
 
 	return 0;
 }
