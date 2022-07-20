@@ -22,12 +22,13 @@ int main() {
 	srand(time(NULL));
 
 	for (int i = 1; i < length - 1; i++) {
-		randInd = rand() % (length + 1);
+		randInd = rand() % (length - 2) + 1;
 		tmp = word[i];
 		word[i] = word[randInd];
 		word[randInd] = tmp;
+		printf("\n%s", word);
 	}
 	
-	printf("%s", word);
+	printf("\n%s", word);
 
 }
