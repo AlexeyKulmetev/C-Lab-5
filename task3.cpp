@@ -4,11 +4,10 @@
 #include "task3.h"
 
 
-#define M 50
+#define M 100
 char* mixChars(char* in, char* out) {
 
 	char tmp;
-	int i = 0;
 	int randInd = 0;
 	int length = 0;
 
@@ -16,7 +15,6 @@ char* mixChars(char* in, char* out) {
 	for (int i = 0; in[i] != '\0' && in[i] != '\n' && in[i] != ' '; i++) {
 		out[i] = in[i];
 		length++;
-		i++;
 	}
 	// MIXING LETTERS IN THE WORD
 	srand(time(NULL));
@@ -25,16 +23,14 @@ char* mixChars(char* in, char* out) {
 		tmp = out[i];
 		out[i] = out[randInd];
 		out[randInd] = tmp;
-		printf("\n%s", out);
 	}
-	printf("\n%s", out);
 	return out;
 }
 
 char* mixLine(char* instr, char* outstr) {
 
 	char* word;
-	char out_word[100];
+	char out_word[M];
 	int i = 0;
 	int out_str_ind = 0;
 
@@ -47,14 +43,20 @@ char* mixLine(char* instr, char* outstr) {
 				i++;
 			}			
 			// FORM THE OUTPUT STRING
-			for (int i = 0; out_word[i] != '\0'; i++) {
-				outstr[out_str_ind++] = out_word[i];
+			for (int j = 0; out_word[j] >= 'A' && out_word[j] <= 'Z' || out_word[j] >= 'a' && out_word[j] <= 'z'; j++) {
+				outstr[out_str_ind++] = out_word[j];
 			}
-			if (instr[i + 1] != '\0' || instr[i + 1] != '\n') {
+			// ADD A SPACE AFTER THE WORD IN OUTPUT STRING
+			if (instr[i] != '\0' && instr[i] != '\n') { 
 				outstr[out_str_ind++] = ' ';
 			}
 		}
 		else i++;
+		// CLEAR VARIABLE out_word
+		for (int k = 0; k < M; k++){
+			out_word[k] = '\0';
+		}
 	}
+	outstr[out_str_ind] = '\0';
 	return outstr;
 }
