@@ -15,6 +15,7 @@ char* randomWords(char* in, char* out) {
 	int i = 0;
 	int newStrInd = 0;
 
+
 	while (in[i] != '\0' && in[i] != '\n') {
 		if (in[i] >= 'A' && in[i] <= 'Z' || in[i] >= 'a' && in[i] <= 'z') {
 			pArray[pIndex++] = &in[i];
@@ -25,15 +26,7 @@ char* randomWords(char* in, char* out) {
 	}
 
 	pArray[pIndex] = NULL;
-	i = 0;
-	printf("\n");
-	// PRINTING AN ARRAY OF POINTERS BEFOR MIXING
-	while (pArray[i] != NULL) {
-		printf(" %c ", *pArray[i]);
-		i++;
-	}
-	printf("\n");
-	i = 0;
+
 	// FISHER-YATES MIXING
 	srand(time(NULL));
 
@@ -42,14 +35,6 @@ char* randomWords(char* in, char* out) {
 		tmpPointer = pArray[i];
 		pArray[i] = pArray[randNum];
 		pArray[randNum] = tmpPointer;
-	}
-
-	printf("\n");
-	i = 0;
-	// PRINTING AN ARRAY OF POINTERS AFTER MIXING
-	while (pArray[i] != NULL) {
-		printf(" %c ", *pArray[i]);
-		i++;
 	}
 
 	// FORM A NEW STRING USING JUMBLED POINTERS
